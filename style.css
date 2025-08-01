@@ -1,0 +1,153 @@
+/* === Base Setup === */
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: #000000;
+  overflow: hidden;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* === Overlay for smooth transition === */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(to top right, #d8e4fa, #b9beff);
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+  z-index: -1;
+}
+
+body.light::before {
+  opacity: 1;
+}
+
+.folder-container {
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  position: relative;
+  z-index: 10;
+}
+
+/* === Folder Base === */
+.folder-base {
+  width: 320px;
+  background-color: #ff4d6d;
+  border-radius: 0 0 10px 10px;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* === Flap Animation === */
+.flap {
+  width: 100%;
+  height: 80px;
+  background-color: #ff6b81;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: top;
+  transform: rotateX(0deg);
+  transition: transform 1s ease;
+  border-radius: 10px 10px 0 0;
+  z-index: 2;
+}
+
+.folder-container.open .flap {
+  transform: rotateX(-130deg);
+}
+
+/* === Tab and Hearts === */
+.tab {
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  background-color: #ff4d6d;
+  padding: 5px 15px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.hearts {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 22px;
+  color: white;
+}
+
+/* === Letter Reveal === */
+.letter {
+  padding: 20px;
+  padding-top: 100px;
+  background-color: #ff9ebf;
+  opacity: 0;
+  max-height: 0;
+  transition: opacity 1.5s ease, max-height 1.5s ease;
+  overflow: hidden;
+}
+
+.folder-container.open .letter {
+  opacity: 1;
+  max-height: 500px; /* Enough height to allow scroll inside */
+  overflow: hidden;
+}
+
+/* Make inner content scrollable */
+.letter-content {
+  max-height: 380px; /* Less than .letter's max-height to allow padding */
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #ffb6c1 transparent;
+}
+
+.letter-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.letter-content::-webkit-scrollbar-thumb {
+  background-color: #b6cdff;
+  border-radius: 10px;
+}
+
+/* === Floating Heads === */
+.floating-heads {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* stay behind the folder and letter */
+  pointer-events: none;
+}
+
+.floating-heads .head {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  animation: float 4s ease-in-out infinite alternate;
+  opacity: 0.7;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-20px); }
+}
+
+/* === Optional: Responsive === */
+@media (max-width: 480px) {
+  .letter {
+    height: 300px;
+    padding-top: 80px;
+  }
+}

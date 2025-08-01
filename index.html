@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Love Letter Folder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="folder-container" onclick="document.body.classList.toggle('light'); this.classList.toggle('open')">
+    <div class="folder-base">
+
+        <audio id="bg-music" src="love-song.mp3" preload="auto"></audio>
+
+        <!-- Floating Pikachu & Stitch Heads -->
+<div class="floating-heads">
+  <img src="pikachu.png" class="head" style="top: 5%; left: 10%;" />
+  <img src="stitch.png" class="head" style="top: 5%; left: 70%;" />
+</div>
+      <div class="flap">
+        <div class="tab">Tap to Open 💌</div>
+        <div class="hearts">❤️❤️❤️</div>
+      </div>
+      <div class="letter">
+        <div class="letter-content">
+        <h2>My Love,</h2> <p>It’s been 14 beautiful months with you—and even now, I still get butterflies just thinking about us.</p> 
+        <p>I may not always find the perfect words, but my heart has never stopped speaking the language of love—and it speaks your name every time.</p> 
+        <p>From the moment I first pursued you, I already knew this wouldn’t be a perfect ride. And looking back now, we’ve had our share of ups and downs. But through every high and low, one thing has remained constant: it’s still you. It has always been you.</p> 
+        <p>Even with the distance between us, our love never feels far. Somehow, your presence finds its way to me—in the quiet, in the chaos, in the everyday moments. I try my best, always, to make you feel me beside you… holding your hand even when I physically can’t.</p> 
+        <p>Fourteen months with you and I still feel like I’m living in something magical. You bring peace when I’m restless, laughter when I’m tired, and comfort when the world feels too heavy. Being with you feels like home.</p> 
+        <p>On this <strong>Girlfriend’s Day</strong>, I just want you to know: you're not just loved—you are deeply, endlessly, and wholeheartedly treasured. Not just today, but every single day we get to walk this life together.</p>
+        <p>I pray the days ahead bring you nothing but joy, growth, and the dreams you’re chasing. And I promise, I’ll be here—loving you, choosing you, and writing this love story with you one day at a time.</p>
+        <p>Here’s to us. Here’s to forever.</p>
+         <p>I love you always,</p>
+         <p><strong>— MR.S</strong></p>
+        </p>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+  window.onload = function () {
+    const folder = document.querySelector('.folder-container');
+    const music = document.getElementById('bg-music');
+
+    folder.addEventListener('click', function () {
+      // Play music only on first open
+      if (!document.body.classList.contains('dark')) {
+        if (music.paused) {
+          music.volume = 1;
+          music.play().then(() => {
+            console.log("Music playing");
+          }).catch((err) => {
+            console.warn("Playback failed:", err);
+          });
+        }
+      }
+    });
+  };
+</script>
+
+
+</body>
+</html>
